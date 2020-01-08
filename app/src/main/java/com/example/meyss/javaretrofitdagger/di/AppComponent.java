@@ -8,9 +8,11 @@ import javax.inject.Singleton;
 
 import dagger.BindsInstance;
 import dagger.Component;
+import dagger.android.AndroidInjectionModule;
+import dagger.android.AndroidInjector;
 
 @Singleton
-@Component(modules = {RetrofitModule.class,DaoProvider.class})
+@Component(modules = {RetrofitModule.class,DaoProvider.class, AndroidInjectionModule.class,ActivityBuilderModule.class})
 public interface AppComponent {
     void inject(MainActivity clas);
     @Component.Builder

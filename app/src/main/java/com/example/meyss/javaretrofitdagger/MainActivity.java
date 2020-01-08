@@ -16,6 +16,7 @@ import javax.inject.Inject;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import dagger.android.AndroidInjection;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     PokemonRepo repo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         RecyclerView pokRC = (RecyclerView) findViewById(R.id.PokRecycler);
