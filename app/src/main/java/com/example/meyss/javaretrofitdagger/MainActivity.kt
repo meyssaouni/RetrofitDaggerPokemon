@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         //App.getAppComponent().inject(this);
 
 
-        apiInterface!!.listPokemeon().enqueue(object : Callback<PokemonList> {
+        apiInterface.listPokemeon().enqueue(object : Callback<PokemonList> {
             override fun onResponse(call: Call<PokemonList>, response: Response<PokemonList>) {
 
                 val result = response.body()
@@ -63,14 +63,14 @@ class MainActivity : AppCompatActivity() {
                                 a.attackId = i
                                 i++
                             }
-                            repo!!.insertAttack(pok.attacks!!)
+                            repo.insertAttack(pok.attacks!!)
                             println(" attatcks inserted")
                         }
 
                     }
-                    repo!!.insertPok(result.poks!!)
+                    repo.insertPok(result.poks!!)
                     println("room relations")
-                    println(repo!!.attacks)
+                    println(repo.attacks)
 
                 }
             }
