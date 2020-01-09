@@ -44,15 +44,15 @@ class RetrofitModule {
 
     @Singleton
     @Provides
-    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit? {
-        if (retrofit == null) {
-            retrofit = Retrofit.Builder()
+    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit{
+        //if (retrofit == null) {
+         return   Retrofit.Builder()
                     .baseUrl("https://api.pokemontcg.io/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(okHttpClient)
                     .build()
-        }
-        return retrofit
+      //  }
+      //  return retrofit
     }
 
     companion object {

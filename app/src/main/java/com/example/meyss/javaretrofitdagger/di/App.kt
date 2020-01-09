@@ -13,7 +13,7 @@ import retrofit2.Retrofit
 class App : Application(), HasAndroidInjector {
 
     @Inject
-     public var dispacher: DispatchingAndroidInjector<Any>? = null
+     lateinit var dispacher: DispatchingAndroidInjector<Any>
 
     /* public static AppComponent getAppComponent(){
         return appComponent;

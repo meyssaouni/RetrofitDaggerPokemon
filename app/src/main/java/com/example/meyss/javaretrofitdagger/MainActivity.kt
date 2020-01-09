@@ -25,9 +25,9 @@ import retrofit2.Response
 class MainActivity : AppCompatActivity() {
 
     @Inject
-     var apiInterface: ApiInterface? = null
+    lateinit var apiInterface: ApiInterface
     @Inject
-     var repo: PokemonRepo? = null
+     lateinit var repo: PokemonRepo
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
