@@ -1,6 +1,7 @@
 package com.example.meyss.javaretrofitdagger.data
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 
 import androidx.room.Dao
 import androidx.room.Insert
@@ -11,7 +12,7 @@ import androidx.room.Transaction
 interface PokemonDAO {
 
     @get:Query("SELECT * FROM Pokemon")
-    val all: List<Pokemon>
+    val all: LiveData<List<Pokemon>>
 
     @get:Transaction
     @get:Query("SELECT * FROM Pokemon")

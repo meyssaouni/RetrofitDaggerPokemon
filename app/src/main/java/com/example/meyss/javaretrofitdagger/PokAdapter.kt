@@ -24,7 +24,8 @@ import java.net.URL
 import androidx.recyclerview.widget.RecyclerView
 
 class PokAdapter(// Store a member variable for the contacts
-        private val poksList: List<Pokemon>, private val context: Context) : RecyclerView.Adapter<PokAdapter.ViewHolder>() {
+        private var poksList: List<Pokemon>, private val context: Context) : RecyclerView.Adapter<PokAdapter.ViewHolder>() {
+
 
     inner class ViewHolder// We also create a constructor that accepts the entire item row
     // and does the view lookups to find each subview
@@ -74,6 +75,10 @@ class PokAdapter(// Store a member variable for the contacts
         }
 
 
+    }
+    fun  setData(newData: List<Pokemon> ){
+        this.poksList = newData
+        notifyDataSetChanged()
     }
 
     // Returns the total count of items in the list

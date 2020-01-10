@@ -26,7 +26,7 @@ class DaoProvider {
     @Singleton
     fun getProvideAppDATAbASE(application: Application): AppDatabase {
         return Room.databaseBuilder<AppDatabase>(application,
-                AppDatabase::class.java!!, "Cards").allowMainThreadQueries().build()
+                AppDatabase::class.java, "Cards").fallbackToDestructiveMigration().allowMainThreadQueries().build()
     }
 
 }

@@ -12,7 +12,7 @@ import dagger.android.AndroidInjectionModule
 import dagger.android.AndroidInjector
 
 @Singleton
-@Component(modules = [RetrofitModule::class, DaoProvider::class, AndroidInjectionModule::class, ActivityBuilderModule::class])
+@Component(modules = [RetrofitModule::class, DaoProvider::class, AndroidInjectionModule::class, ActivityBuilderModule::class,ViewModuleModule::class])
 interface AppComponent {
     fun inject(clas: MainActivity)
     @Component.Builder
