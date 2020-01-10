@@ -1,11 +1,7 @@
 package com.example.meyss.javaretrofitdagger.viewModel
 
-import android.content.Context
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import androidx.recyclerview.widget.GridLayoutManager
-import com.example.meyss.javaretrofitdagger.PokAdapter
 import com.example.meyss.javaretrofitdagger.Repository.PokemonRepo
 import com.example.meyss.javaretrofitdagger.data.Pokemon
 import com.example.meyss.javaretrofitdagger.data.PokemonList

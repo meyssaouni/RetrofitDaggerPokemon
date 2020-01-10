@@ -1,19 +1,11 @@
 package com.example.meyss.javaretrofitdagger.Repository
 
 import androidx.lifecycle.LiveData
-import android.content.Context
-import androidx.lifecycle.MutableLiveData
-
-import com.example.meyss.javaretrofitdagger.data.AppDatabase
 import com.example.meyss.javaretrofitdagger.data.Attack
 import com.example.meyss.javaretrofitdagger.data.PokAttacks
 import com.example.meyss.javaretrofitdagger.data.Pokemon
 import com.example.meyss.javaretrofitdagger.data.PokemonDAO
-
 import javax.inject.Inject
-
-import androidx.room.Room
-import com.example.meyss.javaretrofitdagger.di.ApiInterface
 
 class PokemonRepo @Inject
 constructor(internal var dao: PokemonDAO) {
