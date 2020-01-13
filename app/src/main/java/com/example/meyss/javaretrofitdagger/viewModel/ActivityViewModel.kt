@@ -38,19 +38,24 @@ class ActivityViewModel @Inject constructor(var repo: PokemonRepo, var api: ApiI
                     var i = 0
                     for (pok in result.poks!!) {
                         println(pok.id)
-                        if (pok.id == "hgss2-90") {
+                        println(i)
+                        if (pok.id.equals("hgss2-90")) {
                             i++
+                            println("hgss2-90: "+i)
 
                         } else {
+                            println(pok.attacks)
                             for (a in pok.attacks!!) {
-                                a.pokId = pok.id
+                               // a.pokId = pok.id
                                 a.attackId = i
+                                println("AttackID: "+a.attackId)
+
                                 i++
+                                println("incremented " +i)
                             }
                             repo.insertAttack(pok.attacks!!)
                             println(" attatcks inserted")
                         }
-
                     }
                     repo.insertPok(result.poks!!)
                     println("room relations")

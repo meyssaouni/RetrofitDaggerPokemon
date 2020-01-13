@@ -3,6 +3,13 @@ package com.example.meyss.javaretrofitdagger.data
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
+import android.R
+import android.widget.ImageView
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.Glide
+import androidx.databinding.BindingAdapter
+
+
 
 @Entity
 class Pokemon {
@@ -27,6 +34,18 @@ class Pokemon {
     var set: String? = null
     var setCode: String? = null
 
+    // important code for loading image here
+    companion object {
+        @JvmStatic
+        @BindingAdapter("avatar")
+        fun loadImage(imageView: ImageView, imageURL: String) {
+            Glide.with(imageView.getContext())
+                    .setDefaultRequestOptions(RequestOptions()
+                            .circleCrop())
+                    .load(imageURL)
+                    .into(imageView)
+        }
+    }
     override fun toString(): String {
         return "Pokemon{" +
                 "id='" + id + '\''.toString() +

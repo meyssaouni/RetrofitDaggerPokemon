@@ -17,6 +17,14 @@ import kotlinx.coroutines.*
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
+import androidx.databinding.DataBindingUtil
+import androidx.core.app.ComponentActivity.ExtraData
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import androidx.databinding.ViewDataBinding
+import com.example.meyss.javaretrofitdagger.databinding.ActivityMainBinding
+
+
 class MainActivity : AppCompatActivity(),CoroutineScope{
     private val job = Job()
 
@@ -35,14 +43,16 @@ lateinit var viewmodelfactory : ViewModelFactory
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        val activityMainBinding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
 
-        val pokRC = findViewById<View>(R.id.PokRecycler) as RecyclerView
+       // setContentView(R.layout.activity_main)
+
+        val pokRC = activityMainBinding.PokRecycler
         pokRC.layoutManager = GridLayoutManager(applicationContext, 2)
         //App.getAppComponent().inject(this);
 
         val viewmodel = ViewModelProviders.of(this,viewmodelfactory).get(ActivityViewModel::class.java)
-//        viewmodel.getAllPoksAPI()
+       // viewmodel.getAllPoksAPI()
 
         launch(Dispatchers.Main){
             async(Dispatchers.IO){
@@ -51,6 +61,7 @@ lateinit var viewmodelfactory : ViewModelFactory
 
 
         }
+
         val pokObserver = Observer<List<Pokemon>> {poks-> pokRC.adapter = PokAdapter(poks,applicationContext) }
         viewmodel.getAllPoks().observe(this,pokObserver)
 

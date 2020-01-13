@@ -1,10 +1,7 @@
 package com.example.meyss.javaretrofitdagger
 
-import android.app.Application
 import android.content.Context
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.net.Uri
 import android.os.StrictMode
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,46 +9,47 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-
-import com.example.meyss.javaretrofitdagger.Repository.PokemonRepo
-import com.example.meyss.javaretrofitdagger.data.Attack
+import androidx.annotation.NonNull
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
+import androidx.recyclerview.widget.RecyclerView
 import com.example.meyss.javaretrofitdagger.data.Pokemon
-
+import com.example.meyss.javaretrofitdagger.databinding.ActivityMainBinding
+import com.example.meyss.javaretrofitdagger.databinding.PokemonItemBinding
 import java.io.IOException
 import java.io.InputStream
-import java.net.MalformedURLException
 import java.net.URL
-import androidx.recyclerview.widget.RecyclerView
 
-class PokAdapter(// Store a member variable for the contacts
-        private var poksList: List<Pokemon>, private val context: Context) : RecyclerView.Adapter<PokAdapter.ViewHolder>() {
+class PokAdapter (private var poksList: List<Pokemon>, private  var context: Context): RecyclerView.Adapter<PokAdapter.ViewHolder>() {
 
+    inner class ViewHolder( val pokItem: PokemonItemBinding) : RecyclerView.ViewHolder(pokItem.root) {
 
-    inner class ViewHolder// We also create a constructor that accepts the entire item row
-    // and does the view lookups to find each subview
-    (itemView: View) : RecyclerView.ViewHolder(itemView) {
         // Your holder should contain a member variable
         // for any view that will be set as you render a row
-        var img: ImageView
-        var nametext: TextView
+        //var img: ImageView
+       // var nametext: TextView
 
-        init {
-
-            nametext = itemView.findViewById<View>(R.id.PokName) as TextView
-            img = itemView.findViewById<View>(R.id.pokImg) as ImageView
-        }// Stores the itemView in a public final member variable that can be used
+        fun bind(obj: Any) {
+            pokItem.setVariable(BR.pokemon, obj)
+            pokItem.executePendingBindings()
+        }
+       // Stores the itemView in a public final member variable that can be used
         // to access the context from any ViewHolder instance.
+
     }
 
+    @NonNull
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokAdapter.ViewHolder {
-        val context = parent.context
-        val inflater = LayoutInflater.from(context)
-        println("iciiii adapter")
+       // val context = parent.context
+      //  val inflater = LayoutInflater.from(context)
         // Inflate the custom layout
-        val pokView = inflater.inflate(R.layout.pokemon_item, parent, false)
+        //val pokView = inflater.inflate(R.layout.pokemon_item, parent, false)
 
+        val binding = DataBindingUtil.inflate<PokemonItemBinding>(
+                LayoutInflater.from(parent.context),
+                R.layout.pokemon_item, parent, false)
         // Return a new holder instance
-        return ViewHolder(pokView)
+        return ViewHolder(binding as PokemonItemBinding)
     }
 
     // Involves populating data into the item through holder
@@ -59,9 +57,10 @@ class PokAdapter(// Store a member variable for the contacts
         // Get the data model based on position
 
         val pok = poksList[position]
-
+        viewHolder.bind(pok)
+        //viewHolder.pokItem.setItemClickListener(this)
         // Set item views based on your views and data model
-        val textView = viewHolder.nametext
+        /*val textView = viewHolder.nametext
         textView.text = pok.name
         val imageView = viewHolder.img
 
@@ -72,7 +71,7 @@ class PokAdapter(// Store a member variable for the contacts
             imageView.setImageBitmap(BitmapFactory.decodeStream(url.content as InputStream))
         } catch (e: IOException) {
             Log.e("imageLoder", e.message)
-        }
+        }*/
 
 
     }

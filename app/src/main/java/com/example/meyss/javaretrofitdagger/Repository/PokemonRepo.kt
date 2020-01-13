@@ -22,6 +22,8 @@ constructor(internal var dao: PokemonDAO) {
         get() = dao.pokAttack
 
     fun insertAttack(attacks: List<Attack>) {
+        println("in REPOOO: " + attacks)
+
         dao.insertAllAttacks(attacks)
 
 
