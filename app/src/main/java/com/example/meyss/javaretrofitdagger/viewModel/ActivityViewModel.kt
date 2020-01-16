@@ -29,13 +29,8 @@ class ActivityViewModel @Inject constructor(var repo: PokemonRepo, var api: ApiI
                 if (result != null) {
                     //retrofit
                     println("pokemons:" + result.poks!!.toString())
-                   // val pokAdapter = PokAdapter(result.poks!!, applicationContext)
-                   // pokRC.adapter = pokAdapter
-
                     //room
-
-                    // PokemonRepo repo = new PokemonRepo(context);
-                    var i = 0
+                   var i = 0
                     for (pok in result.poks!!) {
                         println(pok.id)
                         println(i)

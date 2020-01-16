@@ -1,5 +1,6 @@
 package com.example.meyss.javaretrofitdagger
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -21,11 +22,23 @@ import androidx.databinding.DataBindingUtil
 import androidx.core.app.ComponentActivity.ExtraData
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import android.os.Parcelable
+import android.widget.Toast
 import androidx.databinding.ViewDataBinding
+import com.example.meyss.javaretrofitdagger.EventBus.PokEvent
 import com.example.meyss.javaretrofitdagger.databinding.ActivityMainBinding
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
+import java.io.Serializable
 
 
-class MainActivity : AppCompatActivity(),CoroutineScope{
+class MainActivity : AppCompatActivity(),CoroutineScope, iOnPokemonClicked {
+    override fun clickedPok(pok: Pokemon) {
+        val intent = Intent(this,PokDetails::class.java).putExtra("pokemon",pok)
+        startActivity(intent)
+    }
+
     private val job = Job()
 
     @Inject
@@ -49,10 +62,8 @@ lateinit var viewmodelfactory : ViewModelFactory
 
         val pokRC = activityMainBinding.PokRecycler
         pokRC.layoutManager = GridLayoutManager(applicationContext, 2)
-        //App.getAppComponent().inject(this);
 
         val viewmodel = ViewModelProviders.of(this,viewmodelfactory).get(ActivityViewModel::class.java)
-       // viewmodel.getAllPoksAPI()
 
         launch(Dispatchers.Main){
             async(Dispatchers.IO){
@@ -62,7 +73,7 @@ lateinit var viewmodelfactory : ViewModelFactory
 
         }
 
-        val pokObserver = Observer<List<Pokemon>> {poks-> pokRC.adapter = PokAdapter(poks,applicationContext) }
+        val pokObserver = Observer<List<Pokemon>> {poks-> pokRC.adapter = PokAdapter(poks,this).apply { setOnPokemonClicked(this@MainActivity) }}
         viewmodel.getAllPoks().observe(this,pokObserver)
 
 

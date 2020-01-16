@@ -2,9 +2,10 @@ package com.example.meyss.javaretrofitdagger.data
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 @Entity
-class Attack {
+class Attack : Serializable{
     @PrimaryKey
     var attackId: Int = 0
     var name: String? = null

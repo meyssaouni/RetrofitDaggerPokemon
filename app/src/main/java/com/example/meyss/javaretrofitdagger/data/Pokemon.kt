@@ -3,16 +3,14 @@ package com.example.meyss.javaretrofitdagger.data
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
-import android.R
 import android.widget.ImageView
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.Glide
 import androidx.databinding.BindingAdapter
-
-
+import java.io.Serializable
 
 @Entity
-class Pokemon {
+class Pokemon : Serializable {
     @PrimaryKey
     var id: String = "0"
     var name: String? = null
@@ -38,12 +36,12 @@ class Pokemon {
     companion object {
         @JvmStatic
         @BindingAdapter("avatar")
-        fun loadImage(imageView: ImageView, imageURL: String) {
-            Glide.with(imageView.getContext())
-                    .setDefaultRequestOptions(RequestOptions()
-                            .circleCrop())
+        fun loadImage(imageView: ImageView?, imageURL: String?) {
+            Glide.with(imageView!!.getContext())
+                    //.setDefaultRequestOptions(RequestOptions()
+                     //       .circleCrop())
                     .load(imageURL)
-                    .into(imageView)
+                    .into(imageView!!)
         }
     }
     override fun toString(): String {
