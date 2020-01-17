@@ -1,18 +1,31 @@
-package com.example.meyss.javaretrofitdagger
+package com.example.meyss.javaretrofitdagger.Activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.example.meyss.javaretrofitdagger.EventBus.CardDetailEvent
+import com.example.meyss.javaretrofitdagger.Fragments.PokDetails2
+import com.example.meyss.javaretrofitdagger.R
 import com.example.meyss.javaretrofitdagger.data.Pokemon
-import com.example.meyss.javaretrofitdagger.ui.pokdetailsfragment1.PokDetailsFragment1
+import com.example.meyss.javaretrofitdagger.Fragments.PokDetailsFragment1
+import dagger.android.AndroidInjection
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasAndroidInjector
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
+import javax.inject.Inject
 
-class PokDetails : AppCompatActivity() {
+class PokDetails : AppCompatActivity(), HasAndroidInjector {
+    @Inject
+    lateinit var dispacher: DispatchingAndroidInjector<Any>
+    override fun androidInjector(): AndroidInjector<Any> {
+        return dispacher
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.pok_details_activity)
         val pokemon = intent?.extras!!.get("pokemon") as Pokemon
@@ -36,13 +49,13 @@ class PokDetails : AppCompatActivity() {
     }
     @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
     fun onPokEvent(pokEvent: CardDetailEvent){
-       // Toast.makeText(context, "You clicked " + pokEvent.pok, Toast.LENGTH_LONG).show()
-        val pokdetails = PokDetails2.newInstance()
+        val pokdetailsFragment = PokDetails2.newInstance()
         val bundle = Bundle().apply { putSerializable("pokemon",pokEvent.pok) }
-        pokdetails.arguments =bundle
+        pokdetailsFragment.arguments =bundle
         supportFragmentManager.beginTransaction()
-                .replace(R.id.container, pokdetails)
+                .replace(R.id.container, pokdetailsFragment)
                 .commitNow()
     }
+
 
 }

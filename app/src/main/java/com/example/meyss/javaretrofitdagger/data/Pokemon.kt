@@ -54,7 +54,7 @@ class Pokemon : Serializable {
                 ", supertype='" + supertype + '\''.toString() +
                 ", subtype='" + subtype + '\''.toString() +
                 ", hp='" + hp + '\''.toString() +
-                ", attacks=" + attacks +
+              //  ", attacks=" + attacks +
                 ", convertedRetreatCost=" + convertedRetreatCost +
                 ", number='" + number + '\''.toString() +
                 ", artist='" + artist + '\''.toString() +

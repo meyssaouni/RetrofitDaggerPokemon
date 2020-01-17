@@ -1,4 +1,4 @@
-package com.example.meyss.javaretrofitdagger.ui.pokdetailsfragment1
+package com.example.meyss.javaretrofitdagger.viewModel
 
 import androidx.lifecycle.ViewModel
 import com.example.meyss.javaretrofitdagger.BR

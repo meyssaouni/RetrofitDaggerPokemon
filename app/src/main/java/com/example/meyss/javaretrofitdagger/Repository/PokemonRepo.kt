@@ -37,10 +37,14 @@ constructor(internal var dao: PokemonDAO) {
         println("pokemon Repo Insert")
     }
 
-    fun getPokemon(name: String): Pokemon {
+    fun getPokemon(id: String): Pokemon {
         println("pokemon Repo getByName")
-        return dao.findByName(name)
+        return dao.findByName(id)
 
 
+    }
+    fun getAttacksIdPok(idpok: String):List<Attack>{
+
+        return dao.AttacksPokId(idpok)
     }
 }

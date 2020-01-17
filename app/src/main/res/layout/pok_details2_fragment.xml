@@ -1,13 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="pokemon"
+            type="com.example.meyss.javaretrofitdagger.data.Pokemon"/>
+    </data>
+<FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PokDetails2">
-
-    <TextView
+    tools:context=".Fragments.PokDetails2"
+    >
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        android:layout_margin="5dp"
+        app:cardCornerRadius="20dp"
+        app:cardBackgroundColor="#F7C45B"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{pokemon.id}"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:id="@+id/id"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{pokemon.name}"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:id="@+id/nom"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{String.valueOf(pokemon.nationalPokedexNumber)}"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:id="@+id/natNumber"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{pokemon.supertype}"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:id="@+id/superType"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{pokemon.subtype}"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:id="@+id/subType"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{pokemon.hp}"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:id="@+id/hp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{String.valueOf(pokemon.convertedRetreatCost)}"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:id="@+id/ConvertedRC"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{pokemon.number}"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:id="@+id/number"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{pokemon.artist}"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:id="@+id/artist"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{pokemon.rarity}"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:id="@+id/rarity"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{pokemon.rarity}"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:id="@+id/series"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{pokemon.set}"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:id="@+id/set"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{pokemon.setCode}"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:id="@+id/setC"/>
 
+            <Button
+                android:id="@+id/attacks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Attacks"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:backgroundTint="#FFDE3B"/>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 </FrameLayout>
+</layout>

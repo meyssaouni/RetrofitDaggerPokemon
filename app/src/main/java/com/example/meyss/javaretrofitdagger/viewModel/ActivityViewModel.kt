@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 class ActivityViewModel @Inject constructor(var repo: PokemonRepo, var api: ApiInterface) : ViewModel() {
 
-
+        var pokTest : Pokemon?=null
     fun getAllPoks(): LiveData<List<Pokemon>>{
 
             return repo.allPoks
@@ -31,31 +31,34 @@ class ActivityViewModel @Inject constructor(var repo: PokemonRepo, var api: ApiI
                     println("pokemons:" + result.poks!!.toString())
                     //room
                    var i = 0
-                    for (pok in result.poks!!) {
-                        println(pok.id)
-                        println(i)
-                        if (pok.id.equals("hgss2-90")) {
-                            i++
-                            println("hgss2-90: "+i)
+                    if(repo.getPokemon(result!!.poks!!.get(0).id).equals(null)) {
+                        for (pok in result.poks!!) {
+                            println(pok.id)
+                            println(i)
+                            println("Pok de Test =" + repo.getPokemon(pok.id))
 
-                        } else {
-                            println(pok.attacks)
-                            for (a in pok.attacks!!) {
-                               // a.pokId = pok.id
-                                a.attackId = i
-                                println("AttackID: "+a.attackId)
-
+                            if (pok.id.equals("hgss2-90")) {
                                 i++
-                                println("incremented " +i)
-                            }
-                            repo.insertAttack(pok.attacks!!)
-                            println(" attatcks inserted")
-                        }
-                    }
-                    repo.insertPok(result.poks!!)
-                    println("room relations")
-                    println(repo.attacks)
+                                println("hgss2-90: " + i)
 
+                            } else {
+                                println(pok.attacks)
+                                for (a in pok.attacks!!) {
+                                    a.pokId = pok.id
+                                    a.attackId = i
+                                    println("AttackID: " + a.attackId)
+
+                                    i++
+                                    println("incremented " + i)
+                                }
+                                repo.insertAttack(pok.attacks!!)
+                                println(" attatcks inserted")
+                            }
+                        }
+                        repo.insertPok(result.poks!!)
+                        println("room relations")
+                        println(repo.attacks)
+                    }
                 }
             }
 

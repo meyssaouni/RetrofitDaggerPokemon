@@ -1,8 +1,9 @@
 package com.example.meyss.javaretrofitdagger.di
 
-import com.example.meyss.javaretrofitdagger.MainActivity
-import com.example.meyss.javaretrofitdagger.PokDetails
-import com.example.meyss.javaretrofitdagger.ui.pokdetailsfragment1.PokDetailsFragment1
+import com.example.meyss.javaretrofitdagger.Activities.MainActivity
+import com.example.meyss.javaretrofitdagger.Activities.PokDetails
+import com.example.meyss.javaretrofitdagger.Fragments.AttacksFragment
+import com.example.meyss.javaretrofitdagger.Fragments.PokDetailsFragment1
 
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -10,14 +11,13 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class ActivityBuilderModule {
 
-    @ContributesAndroidInjector
-    internal abstract fun mainActivity(): MainActivity
-
-    @ContributesAndroidInjector
-    internal abstract fun pokDetails(): PokDetails
+    @ContributesAndroidInjector//(modules = [FragmentBuilderModule::class])
+     abstract fun mainActivity(): MainActivity
 
 
-    @ContributesAndroidInjector
-    internal abstract fun pokDetails1(): PokDetailsFragment1
+    @ContributesAndroidInjector(modules = [FragmentBuilderModule::class])
+     abstract fun pokDetails(): PokDetails
+
+
 
 }

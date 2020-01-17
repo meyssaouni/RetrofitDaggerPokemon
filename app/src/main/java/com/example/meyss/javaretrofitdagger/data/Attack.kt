@@ -11,7 +11,7 @@ class Attack : Serializable{
     var name: String? = null
     var text: String? = null
     var damage: String? = null
-    var pokId: String = "leak"
+    var pokId: String? = null
     var convertedEnergyCost: Int = 0
 
     override fun toString(): String {

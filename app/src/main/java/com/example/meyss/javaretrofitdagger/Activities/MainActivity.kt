@@ -1,13 +1,11 @@
-package com.example.meyss.javaretrofitdagger
+package com.example.meyss.javaretrofitdagger.Activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.meyss.javaretrofitdagger.Repository.PokemonRepo
 import com.example.meyss.javaretrofitdagger.data.Pokemon
 import com.example.meyss.javaretrofitdagger.di.ApiInterface
@@ -19,42 +17,30 @@ import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
 import androidx.databinding.DataBindingUtil
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-import android.os.Parcelable
-import android.widget.Toast
-import androidx.databinding.ViewDataBinding
-import com.example.meyss.javaretrofitdagger.EventBus.PokEvent
+import androidx.fragment.app.Fragment
+import com.example.meyss.javaretrofitdagger.PokAdapter
+import com.example.meyss.javaretrofitdagger.R
 import com.example.meyss.javaretrofitdagger.databinding.ActivityMainBinding
-import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
-import org.greenrobot.eventbus.ThreadMode
-import java.io.Serializable
+import com.example.meyss.javaretrofitdagger.iOnPokemonClicked
 
 
 class MainActivity : AppCompatActivity(),CoroutineScope, iOnPokemonClicked {
     override fun clickedPok(pok: Pokemon) {
-        val intent = Intent(this,PokDetails::class.java).putExtra("pokemon",pok)
+        val intent = Intent(this, PokDetails::class.java).putExtra("pokemon",pok)
         startActivity(intent)
     }
 
     private val job = Job()
 
     @Inject
-    lateinit var apiInterface: ApiInterface
-    @Inject
-     lateinit var repo: PokemonRepo
+    lateinit var viewmodelfactory : ViewModelFactory
 
-
-
-@Inject
-lateinit var viewmodelfactory : ViewModelFactory
     override val coroutineContext: CoroutineContext
         get() = job + Dispatchers.Main
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
+
         super.onCreate(savedInstanceState)
         val activityMainBinding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
 
@@ -73,12 +59,11 @@ lateinit var viewmodelfactory : ViewModelFactory
 
         }
 
-        val pokObserver = Observer<List<Pokemon>> {poks-> pokRC.adapter = PokAdapter(poks,this).apply { setOnPokemonClicked(this@MainActivity) }}
+        val pokObserver = Observer<List<Pokemon>> {poks-> pokRC.adapter = PokAdapter(poks, this).apply { setOnPokemonClicked(this@MainActivity) }}
         viewmodel.getAllPoks().observe(this,pokObserver)
 
 
 
     }
-
 
 }

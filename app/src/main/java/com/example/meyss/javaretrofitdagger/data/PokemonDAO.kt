@@ -22,7 +22,11 @@ interface PokemonDAO {
     @Insert
     fun insertAllAttacks(attacks: List<Attack>)
 
-    @Query("SELECT * FROM Pokemon WHERE name LIKE :nom")
-    fun findByName(nom: String): Pokemon
+    @Query("SELECT * FROM Pokemon WHERE id LIKE :id")
+    fun findByName(id: String): Pokemon
+
+    //Attacks by pok
+    @Query("SELECT * FROM Attack WHERE pokId LIKE :idpok")
+    fun AttacksPokId(idpok : String): List<Attack>
 
 }

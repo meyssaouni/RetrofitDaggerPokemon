@@ -13,6 +13,6 @@ class PokAttacks {
         return "PokAttacks{" +
                 "pok=" + pok +
                 ", attacks=" + attacks +
-                '}'.toString()
+                '}'
     }
 }
